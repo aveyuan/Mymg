@@ -1,0 +1,35 @@
+{% extends 'base-nonav.html' %}
+{% block title %}
+ 修改密码
+{% endblock %}
+
+{% block body %}
+
+    <form action="{{ url_for('update_pass') }}" method="post" class="layui-form">
+    {{ form.hidden_tag() }}
+        <div class="layui-form-item">
+            <lable class="layui-form-label">密码:</lable>
+            <div class="layui-input-block">
+                {{ form.password1(class="layui-input") }}
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <lable class="layui-form-label">确认密码:</lable>
+            <div class="layui-input-block">
+                {{ form.password2(class="layui-input") }}
+            </div>
+        </div>
+        {% for category, message in get_flashed_messages(with_categories=true) %}
+            <div class="layui-form-item"style="color: red">
+            {{ message }}
+            </div>
+        {% endfor %}
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn layui-btn-danger">修改密码</button>
+            </div>
+        </div>
+    </form>
+
+
+{% endblock %}

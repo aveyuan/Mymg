@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}
+ 待办
+{% endblock %}
+
+{% block body %}
+
+<div class="layui-tab">
+  <ul class="layui-tab-title">
+    <li class="layui-this">修改信息</li>
+    <li>修改密码</li>
+  </ul>
+  <div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
+    <div class="layui-tab-item layui-show" >
+        <iframe src="{{ url_for('update_info') }}" id="ifr1" width="100%"  frameborder="0"  ></iframe>
+    </div>
+    <div class="layui-tab-item">
+        <iframe src="{{ url_for('update_pass') }}" id="ifr2" width="100%"  frameborder="0"  ></iframe>
+    </div>
+  </div>
+</div>
+
+
+
+
+{% endblock %}
+
+{% block js %}
+<script>
+
+ function calcPageHeight(doc) {
+      var cHeight = Math.max(doc.body.clientHeight, doc.documentElement.clientHeight)
+      var sHeight = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight)
+      var height  = Math.max(cHeight, sHeight)
+      return height
+  }
+  var ifr = document.getElementById('ifr1')
+  ifr.onload = function() {
+      var iDoc = ifr.contentDocument || ifr.document
+      var height = calcPageHeight(iDoc)
+      ifr.style.height = height + 'px'
+  }
+  var ifr2 = document.getElementById('ifr2')
+  ifr2.onload = function() {
+      var iDoc = ifr2.contentDocument || ifr2.document
+      var height = calcPageHeight(iDoc)
+      ifr2.style.height = height + 'px'
+  }
+</script>
+{% endblock %}

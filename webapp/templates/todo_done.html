@@ -1,0 +1,49 @@
+{% extends 'base-nonav.html' %}
+{% block title %}
+ 待办列表
+{% endblock %}
+
+{% block body %}
+
+{% for todo in todo.items %}
+      <div class="layui-card layui-bg-orange">
+        <div class="layui-card-header">{{ todo.t_time  }}</div>
+        <div class="layui-card-body">
+          {{ todo.content }}
+        </div>
+      </div>
+{% endfor %}
+
+
+<div id="test1"></div>
+{% endblock %}
+
+{% block js %}
+<script>
+layui.use(['form','laypage','jquery','laydate'],function () {
+    var form = layui.form,
+        $ = layui.$,
+        laydate = layui.laydate,
+        laypage = layui.laypage;
+
+laydate.render({
+    elem: '#t_time'
+    ,type: 'datetime'
+  });
+
+laypage.render({
+  elem: 'test1'
+  ,count: {{ counts }}
+  ,curr:{{ page }}
+  ,jump: function(obj, first){
+
+    //首次不执行
+    if(!first){
+       location.href="{{ url_for('todo_done') }}?page="+obj.curr+"&limit="+obj.limit;
+
+    }
+  }
+});
+    });
+</script>
+{% endblock %}

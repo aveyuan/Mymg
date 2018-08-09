@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>{% block title %}{% endblock %}-我的管理系统</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='layui/css/layui.css') }}" />
+		{% block css %}{% endblock %}
+        <script src="{{ url_for('static',filename='layui/layui.js') }}" type="text/javascript" charset="utf-8"></script>
+
+	</head>
+
+
+	<body>
+        <div class="layui-bg-black">
+            <div class="layui-container">
+                <div class="layui-row">
+                    <ul class="layui-nav">
+                      <li class="layui-nav-item"><a href="{{ url_for('micros') }}">微语</a></li>
+                      <li class="layui-nav-item"><a href="{{ url_for('stime') }}">时间</a></li>
+                      <li class="layui-nav-item"><a href="{{ url_for('todo') }}">待办</a></li>
+                      <li class="layui-nav-item"><a href="{{ url_for('fmg') }}">朋友</a></li>
+                      <li class="layui-nav-item"><a href="{{ url_for('user') }}">个人设置</a></li>
+                      <li class="layui-nav-item"><a href="{{ url_for('logout') }}">退出登录</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-container">
+        <div class="layui-row">
+             {% block body %}{% endblock %}
+        </div>
+        </div>
+
+	</body>
+    {% block footer %}
+    
+    {% endblock %}
+<script>
+layui.use('element', function(){
+  var element = layui.element;
+
+});
+</script>
+{% block js %}{% endblock %}
+</html>

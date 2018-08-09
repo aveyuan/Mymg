@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block title %}
+ 待办
+{% endblock %}
+
+{% block body %}
+<form action="{{ url_for('todo') }}" method="post" class="layui-form" style="padding-top: 15px">
+<div class="layui-form-item ">
+    <div class="layui-inline">
+           <input type="text" class="layui-input" id="t_time" name="t_time" placeholder="提醒时间">
+    </div>
+</div>
+ <div class="layui-form-item layui-form-text">
+      <textarea name="content" width="100%" placeholder="提醒内容" class="layui-textarea"></textarea>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-input-block" style="text-align: right">
+      <button class="layui-btn" type="submit">添加到待办</button>
+    </div>
+  </div>
+</form>
+<div class="layui-tab">
+  <ul class="layui-tab-title">
+    <li class="layui-this">待办<span class="layui-badge">{{ counts }}</span></li>
+    <li>已完成<span class="layui-badge layui-bg-green">{{ ok }}</span></li>
+  </ul>
+  <div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
+    <div class="layui-tab-item layui-show" >
+        <iframe src="{{ url_for('todo_list') }}" id="ifr1" width="100%"  frameborder="0"  ></iframe>
+    </div>
+    <div class="layui-tab-item">
+        <iframe src="{{ url_for('todo_done') }}" id="ifr2" width="100%"  frameborder="0"  ></iframe>
+    </div>
+  </div>
+</div>
+
+
+
+
+{% endblock %}
+
+{% block js %}
+<script>
+layui.use(['form','laypage','jquery','laydate'],function () {
+    var form = layui.form,
+        $ = layui.$,
+        laydate = layui.laydate,
+        laypage = layui.laypage;
+
+laydate.render({
+    elem: '#t_time'
+    ,type: 'datetime'
+  });
+
+
+    });
+ function calcPageHeight(doc) {
+      var cHeight = Math.max(doc.body.clientHeight, doc.documentElement.clientHeight)
+      var sHeight = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight)
+      var height  = Math.max(cHeight, sHeight)
+      return height
+  }
+  var ifr = document.getElementById('ifr1')
+  ifr.onload = function() {
+      var iDoc = ifr.contentDocument || ifr.document
+      var height = calcPageHeight(iDoc)
+      ifr.style.height = height + 'px'
+  }
+  var ifr2 = document.getElementById('ifr2')
+  ifr2.onload = function() {
+      var iDoc = ifr2.contentDocument || ifr2.document
+      var height = calcPageHeight(iDoc)
+      ifr2.style.height = height + 'px'
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base-nonav.html' %}
+{% block title %}
+ 待办列表
+{% endblock %}
+
+{% block body %}
+
+
+
+<table class="layui-table">
+  <colgroup>
+    <col>
+    <col>
+    <col>
+    <col>
+    <col>
+    <col>
+    <col>
+  </colgroup>
+  <thead>
+    <tr>
+      <th>姓名</th>
+      <th>生日类别</th>
+      <th>生日时间</th>
+      <th>电话1</th>
+      <th>QQ</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for fmg in fmg %}
+    <tr>
+      <td>{{ fmg.name }}</td>
+      <td>{{ fmg.birth_type }}</td>
+      <td>{{ fmg.birthday }}</td>
+      <td>{{ fmg.phone1 }}</td>
+      <td>{{ fmg.qq }}</td>
+      <td>
+        <div class="layui-btn-group">
+          <button class="layui-btn layui-btn-sm" ><a href="{{ url_for('fmg_more',id=fmg.id) }}">查看</a></button>
+          <button class="layui-btn layui-btn-sm">编辑</button>
+          <button class="layui-btn layui-btn-sm"><a  href="{{ url_for('fmg_delete',id=fmg.id) }}">删除</a></button>
+        </div>
+      </td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}
+
+{% block js %}
+<script>
+layui.use(['form','laypage','jquery','laydate'],function () {
+    var form = layui.form;
+
+
+    });
+</script>
+{% endblock %}

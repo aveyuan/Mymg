@@ -1,0 +1,51 @@
+{% extends 'base-nonav.html' %}
+{% block title %}
+ 朋友详情
+{% endblock %}
+
+{% block body %}
+<table class="layui-table">
+
+  <tbody>
+    <tr>
+      <td>姓名:{{ fmg.name }}</td>
+      <td>性别:{{ fmg.sex }}</td>
+      <td>生日类型:{{ fmg.birth_type }}</td>
+      <td>生日时间:{{ fmg.birthday }}</td>
+    </tr>
+    <tr>
+      <td>电话1:{{ fmg.phone1 }}</td>
+      <td>电话2:{{ fmg.phone2 }}</td>
+      <td>QQ:{{ fmg.qq }}</td>
+      <td>微信{{ fmg.wechat }}</td>
+    </tr>
+    <tr>
+        <td colspan="4">喜欢:{{ fmg.love }}</td>
+    </tr>
+    <tr>
+        <td colspan="4">讨厌:{{ fmg.halt }}</td>
+    </tr>
+    <tr>
+        <td colspan="4">备注:{{ fmg.note }}</td>
+    </tr>
+    <tr>
+        <td colspan="2">添加时间:{{ fmg.a_time }}</td>
+        <td colspan="2">更新时间:{{ fmg.u_time }}</td>
+    </tr>
+    <tr>
+        <td colspan="4"><button class="layui-btn layui-btn-sm"><a href="{{ url_for("fmg_list") }}">返回列表</a></button></td>
+    </tr>
+  </tbody>
+</table>
+
+{% endblock %}
+
+{% block js %}
+<script>
+layui.use(['form','laypage','jquery','laydate'],function () {
+    var form = layui.form;
+
+
+    });
+</script>
+{% endblock %}

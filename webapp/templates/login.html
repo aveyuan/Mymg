@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>后台登录</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='layui/css/layui.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/login.css') }}" />
+	</head>
+
+	<body>
+		<div class="m-login-bg">
+			<div class="m-login">
+				<h3>后台系统登录</h3>
+				<div class="m-login-warp">
+                    <form action="{{ url_for('login') }}" method="post" class="layui-form">
+                         {{ form.hidden_tag() }}
+						<div class="layui-form-item">
+                            {{ form.username(class="layui-input", placeholder="用户名")  }}
+						</div>
+						<div class="layui-form-item">
+                            {{ form.password(class="layui-input", placeholder="密码")  }}
+						</div>
+						<div class="layui-form-item">
+                                {{ form.remeberme() }}
+						</div>
+
+                    {% for category, message in get_flashed_messages(with_categories=true) %}
+                        <div class="layui-form-item"style="color: red">
+                        {{ message }}
+                        </div>
+                    {% endfor %}
+
+						<div class="layui-form-item m-login-btn">
+							<div class="layui-inline">
+								<button class="layui-btn layui-btn-normal" lay-submit lay-filter="login">登录</button>
+							</div>
+
+							<div class="layui-inline">
+								<button type="reset" class="layui-btn layui-btn-primary">取消</button>
+							</div>
+						</div>
+					</form>
+				</div>
+
+				<p class="copyright">Copyright 2017-2018 Mymg</p>
+			</div>
+		</div>
+
+		<script src="{{ url_for('static',filename='layui/layui.js') }}" type="text/javascript" charset="utf-8"></script>
+		<script>
+			layui.use('form', function() {
+				var form = layui.form;
+
+			});
+		</script>
+	</body>
+
+</html>

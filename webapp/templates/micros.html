@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}
+ 微语
+{% endblock %}
+
+{% block body %}
+<form action="{{ url_for('micros') }}" method="post" class="layui-form" style="padding-top: 15px">
+ <div class="layui-form-item layui-form-text">
+      <textarea name="content" width="100%" class="layui-textarea"></textarea>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-input-block" style="text-align: right">
+      <button class="layui-btn" type="submit">发布微语</button>
+    </div>
+  </div>
+</form>
+<ul class="layui-timeline">
+{% for micros in micro.items %}
+  <li class="layui-timeline-item">
+    <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+    <div class="layui-timeline-content layui-text">
+      <h3 class="layui-timeline-title">{{ micros.time }}</h3>
+      <p>
+        {{ micros.content|safe }}
+      </p>
+    </div>
+  </li>
+{% endfor %}
+</ul>
+<div id="test1"></div>
+{% endblock %}
+
+{% block js %}
+<script>
+layui.use(['form','laypage','jquery'],function () {
+    var form = layui.form,
+        $ = layui.$,
+        laypage = layui.laypage;
+
+laypage.render({
+  elem: 'test1'
+  ,count: {{ counts }}
+  ,curr:{{ page }}
+  ,jump: function(obj, first){
+
+    //首次不执行
+    if(!first){
+       location.href="{{ url_for('micros') }}?page="+obj.curr+"&limit="+obj.limit;
+
+    }
+  }
+});
+    });
+</script>
+{% endblock %}

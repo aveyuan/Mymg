@@ -1,12 +1,15 @@
 #encoding:utf-8
 #mysql
-from os import path
-SQLALCHEMY_DATABASE_URI='mysql+pymysql://root:@localhost/mymg'
+import os
+#开启下面这个用于连接mysql
+#SQLALCHEMY_DATABASE_URI='mysql+pymysql://root:@localhost/myuse'
+#默认使用sqlite3不用安装数据库，很方便
 #sqlite
-#SQLALCHEMY_DATABASE_URI='sqlite:///webapp/mymg.db'
-
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SQLALCHEMY_DATABASE_URI="sqlite:///"+os.path.join(BASE_DIR, 'mymg.db')
+#数据库及加密
 SQLALCHEMY_TRACK_MODIFICATIONS=True
-SECRET_KEY='HELLO WORKD'
+SECRET_KEY='HELLO WORKD' #可以自定义长度
 
 #邮箱设置
 MAIL_SERVER = '' #发信邮箱服务器

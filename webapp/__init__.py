@@ -258,6 +258,7 @@ def fmg_birthday():
             if int(s_month) == int(x_month):
                 cj = int(s_day) - int(x_day)
                 birth.append({"id":fmg.id,"name":fmg.name,"sex":fmg.sex,"birth_type":fmg.birth_type,"birthday":fmg.birthday,"phone1":fmg.phone1,"cj":cj,"qq":fmg.qq})
+    #排序未做
 
     return render_template("fmg_birthday.html",birth=birth)
 

@@ -4,56 +4,80 @@
 {% endblock %}
 
 {% block body %}
-<form action="{{ url_for('add_fmg') }}" method="post" class="layui-form" style="padding-top: 15px">
-<div class="layui-form-item ">
-    <div class="layui-inline">
-           <input type="text" class="layui-input" id="name" name="name" placeholder="姓名">
+<form action="{{ url_for('add_fmg') }}" method="post" class="layui-form layui-form-pane" style="padding-top: 15px">
+
+    <div class="layui-form-item" pane>
+        <label class="layui-form-label">姓名</label>
+        <div class="layui-input-block">
+            <input type="text" class="layui-input" id="name" name="name" placeholder="姓名">
+        </div>
     </div>
-    <div class="layui-inline">
+    <div class="layui-form-item" pane>
+        <label class="layui-form-label">姓名</label>
+        <div class="layui-input-block">
             <select name="sex" >
               <option value="男">男</option>
               <option value="女">女</option>
             </select>
+        </div>
     </div>
-    <div class="layui-inline">
+    <div class="layui-form-item" pane>
+        <label class="layui-form-label">生日类型</label>
+        <div class="layui-input-block">
             <select name="birth_type" >
               <option value="新历">新历</option>
               <option value="农历">农历</option>
             </select>
+        </div>
     </div>
-    <div class="layui-inline">
-           <input type="text" class="layui-input" id="birthday" name="birthday" placeholder="生日">
+    <div class="layui-form-item" pane>
+        <label class="layui-form-label">生日时间</label>
+        <div class="layui-input-block">
+           <input type="text" class="layui-input" id="birthday" name="birthday" value="{{ date }}" placeholder="生日">
+        </div>
     </div>
-</div>
-<div class="layui-form-item ">
-    <div class="layui-inline">
+    <div class="layui-form-item" pane>
+        <label class="layui-form-label">电话1</label>
+        <div class="layui-input-block">
            <input type="text" class="layui-input" id="phone1" name="phone1" placeholder="电话1">
+        </div>
     </div>
-    <div class="layui-inline">
+    <div class="layui-form-item" pane>
+        <label class="layui-form-label">电话2</label>
+        <div class="layui-input-block">
            <input type="text" class="layui-input" id="phone2" name="phone2" placeholder="电话2">
+        </div>
     </div>
-    <div class="layui-inline">
+    <div class="layui-form-item" pane>
+        <label class="layui-form-label">微信</label>
+        <div class="layui-input-block">
            <input type="text" class="layui-input" id="wechat" name="wechat" placeholder="微信">
+        </div>
     </div>
-    <div class="layui-inline">
+    <div class="layui-form-item" pane>
+        <label class="layui-form-label">QQ</label>
+        <div class="layui-input-block">
            <input type="text" class="layui-input" id="qq" name="qq" placeholder="QQ">
+        </div>
     </div>
-</div>
-
-  <div class="layui-form-item layui-form-text">
-      <textarea name="love" width="100%" placeholder="喜欢" class="layui-textarea"></textarea>
-  </div>
-  <div class="layui-form-item layui-form-text">
-      <textarea name="halt" width="100%" placeholder="讨厌" class="layui-textarea"></textarea>
-  </div>
-  <div class="layui-form-item layui-form-text">
-      <textarea name="note" width="100%" placeholder="备注" class="layui-textarea"></textarea>
-  </div>
-        {% for category, message in get_flashed_messages(with_categories=true) %}
-            <div class="layui-form-item"style="color: red">
-            {{ message }}
-            </div>
-        {% endfor %}
+    <div class="layui-form-item" pane>
+        <label class="layui-form-label">喜欢</label>
+        <div class="layui-input-block">
+            <textarea name="love" width="100%" placeholder="喜欢" class="layui-textarea"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item" pane>
+        <label class="layui-form-label">讨厌</label>
+        <div class="layui-input-block">
+            <textarea name="halt" width="100%" placeholder="讨厌" class="layui-textarea"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item" pane>
+        <label class="layui-form-label">备注</label>
+        <div class="layui-input-block">
+             <textarea name="note" width="100%" placeholder="备注" class="layui-textarea"></textarea>
+        </div>
+    </div>
 
   <div class="layui-form-item">
     <div class="layui-input-block" style="text-align: right">

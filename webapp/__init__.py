@@ -320,7 +320,8 @@ def add_fmg():
         db.session.add(fmg)
         db.session.commit()
         return redirect(url_for("fmg_list"))
-    return render_template('add_fmg.html')
+    date = datetime.now().date()
+    return render_template('add_fmg.html',date=date)
 
 @app.route('/fmg_more/')
 @login_required

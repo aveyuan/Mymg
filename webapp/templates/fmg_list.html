@@ -38,8 +38,8 @@
       <td>
         <div class="layui-btn-group">
           <button class="layui-btn layui-btn-sm" ><a href="{{ url_for('fmg_more',id=fmg.id) }}">查看</a></button>
-          <button class="layui-btn layui-btn-sm">编辑</button>
-          <button class="layui-btn layui-btn-sm"><a  href="{{ url_for('fmg_delete',id=fmg.id) }}">删除</a></button>
+          <button class="layui-btn layui-btn-sm"><a  href="{{ url_for('fmg_edit',id=fmg.id) }}">编辑</a></button>
+          <button class="layui-btn layui-btn-sm" onclick="del_sure2()" >删除</button>
         </div>
       </td>
     </tr>
@@ -52,10 +52,21 @@
 
 {% block js %}
 <script>
+var a ;
 layui.use(['form','laypage','jquery','laydate'],function () {
-    var form = layui.form;
-
-
+    var form = layui.form,
+        $ = layui.jquery;
+        a = $("#fid").value;
     });
+
+      function del_sure2(){
+        if(confirm("确认删除吗") ==true){
+    {% for fmg in fmg %}
+            location.href="{{ url_for('fmg_delete',id=fmg.id) }}";
+    {% endfor %}
+        }else{
+            return false;
+        }
+      }
 </script>
 {% endblock %}

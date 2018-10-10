@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block title %}
+ 微语
+{% endblock %}
+
+{% block body %}
+<form action="{{ url_for('update_fmg') }}" method="post" class="layui-form layui-form-pane" style="padding-top: 15px">
+    <input type="hidden" name="id" value="{{ fmg.id }}">
+    <div class="layui-form-item" pane>
+        <label class="layui-form-label">姓名</label>
+        <div class="layui-input-block">
+            <input type="text" class="layui-input" id="name" name="name" value="{{ fmg.name }}" placeholder="姓名">
+        </div>
+    </div>
+    <div class="layui-form-item" pane>
+        <label class="layui-form-label">性别</label>
+        <div class="layui-input-block">
+            <select name="sex" >
+              <option value="{{ fmg.sex }}">{{ fmg.sex }}</option>
+              <option value="男">男</option>
+              <option value="女">女</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item" pane>
+        <label class="layui-form-label">生日类型</label>
+        <div class="layui-input-block">
+            <select name="birth_type" >
+              <option value="{{ fmg.birth_type }}">{{ fmg.birth_type }}</option>
+              <option value="新历">新历</option>
+              <option value="农历">农历</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item" pane>
+        <label class="layui-form-label">生日时间</label>
+        <div class="layui-input-block">
+           <input type="text" class="layui-input" id="birthday" name="birthday" value="{{ fmg.birthday }}" placeholder="生日">
+        </div>
+    </div>
+    <div class="layui-form-item" pane>
+        <label class="layui-form-label">电话1</label>
+        <div class="layui-input-block">
+           <input type="text" class="layui-input" id="phone1" name="phone1" value="{{ fmg.phone1 }}" placeholder="电话1">
+        </div>
+    </div>
+    <div class="layui-form-item" pane>
+        <label class="layui-form-label">电话2</label>
+        <div class="layui-input-block">
+           <input type="text" class="layui-input" id="phone2" name="phone2" value="{{ fmg.phone2 }}" placeholder="电话2">
+        </div>
+    </div>
+    <div class="layui-form-item" pane>
+        <label class="layui-form-label">微信</label>
+        <div class="layui-input-block">
+           <input type="text" class="layui-input" id="wechat" name="wechat" value="{{ fmg.wechat }}" placeholder="微信">
+        </div>
+    </div>
+    <div class="layui-form-item" pane>
+        <label class="layui-form-label">QQ</label>
+        <div class="layui-input-block">
+           <input type="text" class="layui-input" id="qq" name="qq" value="{{ fmg.qq }}" placeholder="QQ">
+        </div>
+    </div>
+    <div class="layui-form-item" pane>
+        <label class="layui-form-label">喜欢</label>
+        <div class="layui-input-block">
+            <textarea name="love" width="100%" placeholder="喜欢" class="layui-textarea">{{ fmg.love }}</textarea>
+        </div>
+    </div>
+    <div class="layui-form-item" pane>
+        <label class="layui-form-label">讨厌</label>
+        <div class="layui-input-block">
+            <textarea name="halt" width="100%" placeholder="讨厌" class="layui-textarea">{{ fmg.halt }}</textarea>
+        </div>
+    </div>
+    <div class="layui-form-item" pane>
+        <label class="layui-form-label">备注</label>
+        <div class="layui-input-block">
+             <textarea name="note" width="100%" placeholder="备注" class="layui-textarea">{{ fmg.note }}</textarea>
+        </div>
+    </div>
+
+  <div class="layui-form-item">
+    <div class="layui-input-block" style="text-align: right">
+      <button class="layui-btn" type="submit">更新朋友</button>
+    </div>
+  </div>
+</form>
+
+{% endblock %}
+
+{% block js %}
+<script>
+layui.use(['form','laypage','jquery','laydate'],function () {
+    var form = layui.form,
+        $ = layui.$,
+        laydate = layui.laydate,
+        laypage = layui.laypage;
+
+laydate.render({
+    elem: '#birthday'
+    ,type: 'date'
+  });
+
+
+    });
+</script>
+{% endblock %}

@@ -330,6 +330,43 @@ def fmg_more():
     fmg = Fmg.query.get(int(id))
     return render_template('fmg_more.html',fmg=fmg)
 
+@app.route('/fmg_edit/')
+@login_required
+def fmg_edit():
+    id = request.args.get('id')
+    fmg = Fmg.query.get(int(id))
+    return render_template('fmg_edit.html', fmg=fmg)
+
+@app.route('/update_fmg',methods=['POST'])
+@login_required
+def update_fmg():
+    if request.method=="POST":
+        id = request.form.get('id')
+        name = request.form.get('name')
+        sex = request.form.get('sex')
+        birthday = request.form.get('birthday')
+        birth_type = request.form.get('birth_type')
+        phone1 = request.form.get('phone1')
+        phone2 = request.form.get('phone2')
+        wechat = request.form.get('wechat')
+        qq = request.form.get('qq')
+        love = request.form.get('love')
+        halt = request.form.get('halt')
+        note = request.form.get('note')
+
+        Fmg.query.filter_by(id=id).update({"name":name})
+        Fmg.query.filter_by(id=id).update({"sex":sex})
+        Fmg.query.filter_by(id=id).update({"birthday":birthday})
+        Fmg.query.filter_by(id=id).update({"birth_type":birth_type})
+        Fmg.query.filter_by(id=id).update({"phone1":phone1})
+        Fmg.query.filter_by(id=id).update({"phone2":phone2})
+        Fmg.query.filter_by(id=id).update({"wechat":wechat})
+        Fmg.query.filter_by(id=id).update({"qq":qq})
+        Fmg.query.filter_by(id=id).update({"love":love})
+        Fmg.query.filter_by(id=id).update({"halt":halt})
+        Fmg.query.filter_by(id=id).update({"note":note})
+        db.session.commit()
+        return redirect(url_for('fmg_list'))
 @app.route("/fmg_delete/")
 @login_required
 def fmg_delete():

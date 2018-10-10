@@ -41,24 +41,24 @@ def get_email():
 todo_ids = []
 
 #待办获得
-def todo_get():
-    todo = Todo.query.filter(Todo.status == "待完成").all()
-    for todo in todo:
-        t = str(todo.t_time)
-        # 先转换为时间数组,然后转换为其他格式
-        timeStruct = time.strptime(t, "%Y-%m-%d %H:%M:%S")
-        strTime = time.strftime("%Y-%m-%d %H:%M", timeStruct) #得到最终的时间
-        #获取系统上的时间进行比对
-        systime = datetime.now().strftime("%Y-%m-%d %H:%M")
-        #如果相等而且发送列表ID没有这个ID就发送邮件
-        if systime == strTime:
-            if todo.id in todo_ids:
-                continue
-            else:
-                todo_ids.append(todo.id)
-                sendmail("计划任务提醒","您的计划任务内容:<br>%s<br>已经到了提醒时间: %s<br>祝计划愉快！" % (todo.content,todo.t_time))
-                Todo.query.filter_by(id=todo.id).update({"status":"已完成"})
-                db.session.commit()
+# def todo_get():
+#     todo = Todo.query.filter(Todo.status == "待完成").all()
+#     for todo in todo:
+#         t = str(todo.t_time)
+#         # 先转换为时间数组,然后转换为其他格式
+#         timeStruct = time.strptime(t, "%Y-%m-%d %H:%M:%S")
+#         strTime = time.strftime("%Y-%m-%d %H:%M", timeStruct) #得到最终的时间
+#         #获取系统上的时间进行比对
+#         systime = datetime.now().strftime("%Y-%m-%d %H:%M")
+#         #如果相等而且发送列表ID没有这个ID就发送邮件
+#         if systime == strTime:
+#             if todo.id in todo_ids:
+#                 continue
+#             else:
+#                 todo_ids.append(todo.id)
+#                 sendmail("计划任务提醒","您的计划任务内容:<br>%s<br>已经到了提醒时间: %s<br>祝计划愉快！" % (todo.content,todo.t_time))
+#                 Todo.query.filter_by(id=todo.id).update({"status":"已完成"})
+#                 db.session.commit()
 
 
 #邮件发送
@@ -125,68 +125,68 @@ def logout():
     return redirect(url_for('login'))
 
 #时间
-@app.route('/stime/',methods=['POST','GET'])
-@login_required
-def stime():
-    if request.method=="POST":
-        stime = Stime(s_time=request.form.get('s_time'),e_time=request.form.get('e_time'),content=request.form.get('content'))
-        db.session.add(stime)
-        db.session.commit()
-        return redirect(url_for('stime'))
-
-    page = request.args.get('page', type=int,default=1)
-    limit = request.args.get('limit', type=int,default=10)
-    stime = Stime.query.order_by(Stime.id.desc()).paginate(page, limit, error_out=False)
-    counts = stime.total;
-    return render_template('stime.html',stime=stime,counts=counts,page=page)
+# @app.route('/stime/',methods=['POST','GET'])
+# @login_required
+# def stime():
+#     if request.method=="POST":
+#         stime = Stime(s_time=request.form.get('s_time'),e_time=request.form.get('e_time'),content=request.form.get('content'))
+#         db.session.add(stime)
+#         db.session.commit()
+#         return redirect(url_for('stime'))
+#
+#     page = request.args.get('page', type=int,default=1)
+#     limit = request.args.get('limit', type=int,default=10)
+#     stime = Stime.query.order_by(Stime.id.desc()).paginate(page, limit, error_out=False)
+#     counts = stime.total;
+#     return render_template('stime.html',stime=stime,counts=counts,page=page)
 
 #待办
-@app.route('/todo/',methods=['POST','GET'])
-@login_required
-def todo():
-    if request.method=="POST":
-        todo = Todo(t_time=request.form.get('t_time'),status="待完成",content=request.form.get('content'))
-        db.session.add(todo)
-        db.session.commit()
-        return redirect(url_for('todo'))
-
-    page = request.args.get('page', type=int,default=1)
-    limit = request.args.get('limit', type=int,default=10)
-    #获取到未完成的待办并添加到渲染
-    todo = Todo.query.filter(Todo.status=="待完成").order_by(Todo.id.desc()).paginate(page, limit, error_out=False)
-    counts = todo.total;
-    ok = Todo.query.filter(Todo.status=="已完成").all()
-    ok = len(ok)
-    return render_template('todo.html',todo=todo,counts=counts,page=page,ok=ok)
+# @app.route('/todo/',methods=['POST','GET'])
+# @login_required
+# def todo():
+#     if request.method=="POST":
+#         todo = Todo(t_time=request.form.get('t_time'),status="待完成",content=request.form.get('content'))
+#         db.session.add(todo)
+#         db.session.commit()
+#         return redirect(url_for('todo'))
+#
+#     page = request.args.get('page', type=int,default=1)
+#     limit = request.args.get('limit', type=int,default=10)
+#     #获取到未完成的待办并添加到渲染
+#     todo = Todo.query.filter(Todo.status=="待完成").order_by(Todo.id.desc()).paginate(page, limit, error_out=False)
+#     counts = todo.total;
+#     ok = Todo.query.filter(Todo.status=="已完成").all()
+#     ok = len(ok)
+#     return render_template('todo.html',todo=todo,counts=counts,page=page,ok=ok)
 
 #待办完成
-@app.route('/todo_done/')
-@login_required
-def todo_done():
-
-    page = request.args.get('page', type=int,default=1)
-    limit = request.args.get('limit', type=int,default=10)
-    todo = Todo.query.filter(Todo.status=="已完成").order_by(Todo.id.desc()).paginate(page, limit, error_out=False)
-    counts = todo.total;
-    return render_template('todo_done.html',todo=todo,counts=counts,page=page)
-
-@app.route("/todo_complete")
-def todo_complete():
-    id = request.args.get('id')
-    Todo.query.filter_by(id=id).update({"status":"已完成"})
-    db.session.commit()
-    return redirect(url_for('todo_list'))
+# @app.route('/todo_done/')
+# @login_required
+# def todo_done():
+#
+#     page = request.args.get('page', type=int,default=1)
+#     limit = request.args.get('limit', type=int,default=10)
+#     todo = Todo.query.filter(Todo.status=="已完成").order_by(Todo.id.desc()).paginate(page, limit, error_out=False)
+#     counts = todo.total;
+#     return render_template('todo_done.html',todo=todo,counts=counts,page=page)
+#
+# @app.route("/todo_complete")
+# def todo_complete():
+#     id = request.args.get('id')
+#     Todo.query.filter_by(id=id).update({"status":"已完成"})
+#     db.session.commit()
+#     return redirect(url_for('todo_list'))
 
 #待办列表
-@app.route('/todo_list/')
-@login_required
-def todo_list():
-
-    page = request.args.get('page', type=int,default=1)
-    limit = request.args.get('limit', type=int,default=10)
-    todo = Todo.query.filter(Todo.status=="待完成").order_by(Todo.id.desc()).paginate(page, limit, error_out=False)
-    counts = todo.total;
-    return render_template('todo_list.html',todo=todo,counts=counts,page=page)
+# @app.route('/todo_list/')
+# @login_required
+# def todo_list():
+#
+#     page = request.args.get('page', type=int,default=1)
+#     limit = request.args.get('limit', type=int,default=10)
+#     todo = Todo.query.filter(Todo.status=="待完成").order_by(Todo.id.desc()).paginate(page, limit, error_out=False)
+#     counts = todo.total;
+#     return render_template('todo_list.html',todo=todo,counts=counts,page=page)
 
 #修改密码
 @app.route('/update_pass/',methods=['GET','POST'])
@@ -319,7 +319,7 @@ def add_fmg():
                   )
         db.session.add(fmg)
         db.session.commit()
-        flash("添加用户成功")
+        return redirect(url_for("fmg_list"))
     return render_template('add_fmg.html')
 
 @app.route('/fmg_more/')
@@ -340,7 +340,6 @@ def fmg_delete():
 
 @app.route('/mail/')
 def mail():
-    todo_get()
     unlook_birth()
     fmg_mail()
     return jsonify({"mssage":"ok"})

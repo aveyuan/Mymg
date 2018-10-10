@@ -29,20 +29,20 @@ class Micros(db.Model):
     content = db.Column(db.TEXT)
 
 #时间进程
-class Stime(db.Model):
-    __tablename__ = "mymg_stime"
-    id = db.Column(db.Integer,primary_key=True,autoincrement=True)
-    s_time = db.Column(db.DateTime)
-    e_time = db.Column(db.DateTime)
-    content = db.Column(db.TEXT)
+# class Stime(db.Model):
+#     __tablename__ = "mymg_stime"
+#     id = db.Column(db.Integer,primary_key=True,autoincrement=True)
+#     s_time = db.Column(db.DateTime)
+#     e_time = db.Column(db.DateTime)
+#     content = db.Column(db.TEXT)
 
 #计划
-class Todo(db.Model):
-    __tablename__ = "mymg_todo"
-    id = db.Column(db.Integer,primary_key=True,autoincrement=True)
-    content = db.Column(db.TEXT)
-    t_time = db.Column(db.DateTime) #提醒时间
-    status = db.Column(db.String(8)) #状态
+# class Todo(db.Model):
+#     __tablename__ = "mymg_todo"
+#     id = db.Column(db.Integer,primary_key=True,autoincrement=True)
+#     content = db.Column(db.TEXT)
+#     t_time = db.Column(db.DateTime) #提醒时间
+#     status = db.Column(db.String(8)) #状态
 
 #朋友
 class Fmg(db.Model):

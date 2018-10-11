@@ -30,7 +30,7 @@
   <tbody>
 {% for fmg in birth %}
     <tr>
-      <td>{{ fmg.name }}</td>
+      <td><a href="{{ url_for('fmg_more',id=fmg.id) }}">{{ fmg.name }}</a></td>
       <td>{{ fmg.birth_type }}</td>
       <td>{{ fmg.birthday }}</td>
       <td>{{ fmg.phone1 }}</td>

@@ -1,7 +1,7 @@
 # Mymg 我的管理系统
 ## 开发环境
 Python3.6+Flask
-数据库推荐使用mysql
+默认使用Sqlite3,如需使用Mysql可修改weapp下的config.py文件
 ## 数据功能
 微言、时间、计划、朋友 总共4个功能
 ### 微言
@@ -23,3 +23,8 @@ Python3.6+Flask
 windows先下载Python3.6然后再点击一键安装就ok了
 
 **时间和计划功能并不常用，所以，在后面的版本去除**
+## 功能截图
+![avatar](./img/01.JPG)
+![avatar](./img/fr.JPG)
+![avatar](./img/sr.JPG)
+![avatar](./img/user.JPG)

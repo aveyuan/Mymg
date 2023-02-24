@@ -1,4 +1,5 @@
 # Mymg 我的管理系统
+**不再维护,计划使用Golang重写**
 ## 开发环境
 Python3.6+Flask
 默认使用Sqlite3,如需使用Mysql可修改weapp下的config.py文件
